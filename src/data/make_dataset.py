@@ -1,19 +1,42 @@
 # -*- coding: utf-8 -*-
-import click
-import logging
-from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
+
+import numpy as np
+import pandas as pd
+import os
 
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
-    logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
+class DataLoader:
+    def __init__(self, data_path, emb_path):
+        self.data_path = data_path
+        self.emb_path = emb_path
+
+    self.word2vec_dict = {}
+    with open(self.emb_path) as f:
+        for line in f:
+            l = line.split()
+            word = l[0]
+            word_emb = np.array(l[1:], dtype=np.float64)
+            self.word2vec_dict[word] = word_emb
+
+    def text_2_num(self, essay_id):
+
+        train_x = []
+        for i in range(trainx.shape[0]):
+            sentence = trainx[i]
+            emb = np.zeros(300)
+            words = sentence.split()
+            t_n = 0
+            skip = 0
+            for word in words:
+                try:
+                    emb += word2vec_dict[word.lower()]
+                    t_n += 1
+                except:
+                    skip += 1
+                    pass
+
+            train_x.append(emb / t_n)
+        return train_x
 
 
 if __name__ == '__main__':
