@@ -56,15 +56,18 @@ class DataLoader:
         return np.array(train_x), np.array(train_y)
 
     def get_data(self):
-        train_X, train_Y, val_X, val_Y = [], [], [], []
+        train_X, train_Y, val_X, val_Y, test_X, test_Y = [], [], [], [], [], []
         for i in self.total_essay_sets:
             x, y = self.get_essay_data(i)
-            split = int(x.shape[0]*0.8)
-            train_X.append(x[:split])
-            train_Y.append(y[:split])
-            val_X.append(x[split:])
-            val_Y.append(y[split:])
-            print(x.shape, y.shape)
+            split_1 = int(x.shape[0]*0.8)
+            split_2 = int(x.shape[0]*0.9)
+            train_X.append(x[:split_1])
+            train_Y.append(y[:split_1])
+            val_X.append(x[split_1:split_2])
+            val_Y.append(y[split_1:split_2])
+            test_X.append(x[split_2:])
+            test_Y.append(y[split_2:])
+
 
         train_X = np.vstack(train_X)
         train_Y = np.vstack(train_Y)
@@ -72,9 +75,11 @@ class DataLoader:
         val_X = np.vstack(val_X)
         val_Y = np.vstack(val_Y)
 
-        print("train X Shape {0} and Y Shape {1}, validation X shape {2} and Y shape {3}".format(train_X.shape, train_Y.shape, val_X.shape, val_Y.shape))
+        test_X = np.vstack(test_X)
+        test_Y = np.vstack(test_Y)
 
-        return train_X, train_Y, val_X, val_Y
+        print("Train X : {0}, Train Y : {1}, val X : {2}, val Y : {3}, test X : {4}, test Y : {5}".format(train_X.shape, train_Y.shape, val_X.shape, val_Y.shape, test_X.shape, test_Y.shape))
+
 
 if __name__ == '__main__':
 
