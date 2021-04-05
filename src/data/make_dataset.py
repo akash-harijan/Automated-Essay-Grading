@@ -68,7 +68,6 @@ class DataLoader:
             test_X.append(x[split_2:])
             test_Y.append(y[split_2:])
 
-
         train_X = np.vstack(train_X)
         train_Y = np.vstack(train_Y)
 
@@ -78,7 +77,8 @@ class DataLoader:
         test_X = np.vstack(test_X)
         test_Y = np.vstack(test_Y)
 
-        print("Train X : {0}, Train Y : {1}, val X : {2}, val Y : {3}, test X : {4}, test Y : {5}".format(train_X.shape, train_Y.shape, val_X.shape, val_Y.shape, test_X.shape, test_Y.shape))
+        print("Train X : {0}, Train Y : {1}, val X : {2}, val Y : {3}, test X : {4}, test Y : {5}".
+              format(train_X.shape, train_Y.shape, val_X.shape, val_Y.shape, test_X.shape, test_Y.shape))
 
 
 if __name__ == '__main__':
